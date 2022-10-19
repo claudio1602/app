@@ -31,6 +31,10 @@ const routes: Routes = [
     path: 'correo',
     loadChildren: () => import('./pages/correo/correo.module').then( m => m.CorreoPageModule)
   },
+  {
+    path: '**',
+    loadChildren: () => import('./pages/pagina-no-encontrada/pagina-no-encontrada.module').then( m => m.PaginaNoEncontradaPageModule)
+  },
 ];
 
 @NgModule({
