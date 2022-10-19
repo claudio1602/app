@@ -1,0 +1,117 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+   <ion-img src="https://cdn.discordapp.com/attachments/962446660816994347/1013992565479063612/unknown.png"  id="imagen"></ion-img>
+   <ion-title  #titulo class="ion-text-left ion-text" id="titulo" >
+    Sistema de Asistencia Duoc UC
+  </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" class="ion-padding-horizontal">
+  <ion-list>
+    <ion-item>
+      <ion-avatar>
+        <ion-img src="https://e7.pngegg.com/pngimages/223/244/png-clipart-computer-icons-avatar-user-profile-avatar-heroes-rectangle.png"></ion-img>
+      </ion-avatar>
+      <ion-label>
+        <h2 *ngIf="usuario">{{ usuario.correo }}</h2>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-title class="ion-padding-top">
+    <ion-label>
+       <ion-title #bienvenido class="ion-text-center ion-text" id="bienvenido">
+        ¡Bienvenido!
+      </ion-title>
+        <ion-card-title class="ion-text-center">
+          <ion-label #nombreusuario>
+            <br>
+            <h1 *ngIf="usuario.correo == 'atorres@duocuc.cl'" >  Ana Torres Leiva </h1> 
+            <h1 *ngIf="usuario.correo == 'avalenzuela@duocuc.cl'" > Alberto Valenzuela Nuñez </h1> 
+            <h1 *ngIf="usuario.correo == 'cfuentes@duocuc.cl'" > Carla Fuentes González </h1>
+          </ion-label>
+        </ion-card-title>
+    </ion-label>
+  </ion-title>
+
+  <h4 class="ion-text-center">Escanea el código QR para registrar tu asistencia a clases</h4>
+  <input #fileinput hidden id="input-file" type="file" accept="image/*;capture=camera" 
+    (change)="verificarArchivoConQR($event.target.files)" />
+
+
+
+  <ion-button *ngIf="!escaneando" (click)="comenzarEscaneoQR()" shape="round" color="tertiary">
+    <ion-icon slot="start" name="videocam-outline"></ion-icon>
+    Comenzar Escaneo de QR
+  </ion-button>
+
+  <ion-button *ngIf="escaneando" (click)="detenerEscaneoQR()" expand="full" shape="round">
+    <ion-icon slot="start" name="stop-circle-outline"></ion-icon>
+    Detener escaneo de QR
+  </ion-button>
+<br>
+  <ion-button (click)="limpiarDatos()" shape="round" color="tertiary">
+    <ion-icon slot="start" name="trash-outline"></ion-icon>
+    Limpiar datos
+  </ion-button>
+  <video #video [hidden]="!escaneando" width="100%"></video>
+  <canvas #canvas hidden></canvas>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Datos de la Asignatura</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>  
+<table>
+  <tr>
+    <td class="ancho_columna_titulos">Bloque de Inicio</td>
+    <td>{{bloqueInicio}}</td>
+  <tr>
+  <tr>
+    <td>Bloque de Término</td>
+    <td>{{bloqueTermino}}</td>
+  <tr>
+  <tr>
+    <td>Día</td>
+    <td>{{dia}}</td>
+  <tr>
+  <tr>
+    <td>Hora de Fin</td>
+    <td>{{horaFin}}</td>
+  <tr>
+  <tr>
+    <td>Hora de Inicio</td>
+    <td>{{horaInicio}}</td>
+  <tr>
+  <tr>
+    <td>Sigla</td>
+    <td>{{idAsignatura}}</td>
+  <tr>
+  <tr>
+    <td>Nombre de Asignatura</td>
+    <td>{{nombreAsignatura}}</td>
+  <tr>
+  <tr>
+    <td>Nombredel Profesor</td>
+    <td>{{nombreProfesor}}</td>
+  <tr>
+  <tr>
+    <td>Sección</td>
+    <td>{{seccion}}</td>
+  <tr>
+  <tr>
+    <td>Sede</td>
+    <td>{{sede}}</td>
+  <tr>
+</table>
+    </ion-card-content>
+  </ion-card>
+  <ion-button routerLink="">cerrar sesión</ion-button>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-title #desarrolladores class="ion-text-left ion-text">
+      App desarrollada por Claudio Navarro y benjamin Ramirez
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>
